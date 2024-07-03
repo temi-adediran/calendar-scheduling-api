@@ -1,0 +1,26 @@
+Schema
+
+User
+* belongs_to :imageable, polymorphic: true
+- Name
+- Phone no
+- Email address
+
+
+Coach
+* has_one :user, as: :userable
+* has_many :bookings
+- Available times
+
+
+Student
+* has_one :user, as: :userable
+* has_many :bookings
+
+
+Booking
+* belongs_to :coach
+* belongs_to :student
+- time_booked
+- rating
+- notes
