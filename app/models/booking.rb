@@ -11,7 +11,7 @@ end
 #  id          :bigint           not null, primary key
 #  note        :text
 #  rating      :integer
-#  time_booked :datetime
+#  time_booked :datetime         not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  coach_id    :bigint

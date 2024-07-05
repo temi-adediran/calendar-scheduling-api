@@ -10,12 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_03_133613) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_05_031351) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "available_slots", force: :cascade do |t|
+    t.string "date", null: false
+    t.string "time_slots", default: [], array: true
+    t.bigint "coach_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["coach_id"], name: "index_available_slots_on_coach_id"
+    t.index ["date"], name: "index_available_slots_on_date"
+  end
+
   create_table "bookings", force: :cascade do |t|
-    t.datetime "time_booked"
+    t.datetime "time_booked", null: false
     t.integer "rating"
     t.text "note"
     t.bigint "coach_id"
@@ -29,6 +39,20 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_03_133613) do
   create_table "coaches", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "recurring_hours", force: :cascade do |t|
+    t.string "MON", default: [], array: true
+    t.string "TUE", default: [], array: true
+    t.string "WED", default: [], array: true
+    t.string "THUR", default: [], array: true
+    t.string "FRI", default: [], array: true
+    t.string "SAT", default: [], array: true
+    t.string "SUN", default: [], array: true
+    t.bigint "coach_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["coach_id"], name: "index_recurring_hours_on_coach_id"
   end
 
   create_table "students", force: :cascade do |t|

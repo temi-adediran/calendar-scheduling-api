@@ -1,16 +1,18 @@
 Schema
 
 User
-* belongs_to :imageable, polymorphic: true
+* belongs_to :memberable, polymorphic: true
 - Name
 - Phone no
 - Email address
+- member_id
+- member_type
 
 
 Coach
 * has_one :user, as: :userable
 * has_many :bookings
-- Available times
+* has_many :available_dates
 
 
 Student
@@ -21,6 +23,17 @@ Student
 Booking
 * belongs_to :coach
 * belongs_to :student
-- time_booked
+- booking_date
+- start_time
 - rating
 - notes
+
+
+AvailableDates
+Each date has an array of time ranges. Cache available_dates in browser.
+- date e.g Monday, July 1st
+- time_slots ["9:00 - 11:00", "12:00 - 14:00", "15:00 - 17:00"]
+
+RecurringWeeklyHours
+- day e.g MON
+- time_slots ["9:00 - 11:00", "12:00 - 14:00", "15:00 - 17:00"]
