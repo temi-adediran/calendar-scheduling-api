@@ -10,18 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_05_031351) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_06_213223) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "available_slots", force: :cascade do |t|
+  create_table "available_dates", force: :cascade do |t|
     t.string "date", null: false
     t.string "time_slots", default: [], array: true
     t.bigint "coach_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["coach_id"], name: "index_available_slots_on_coach_id"
-    t.index ["date"], name: "index_available_slots_on_date"
+    t.index ["coach_id"], name: "index_available_dates_on_coach_id"
+    t.index ["date"], name: "index_available_dates_on_date"
   end
 
   create_table "bookings", force: :cascade do |t|

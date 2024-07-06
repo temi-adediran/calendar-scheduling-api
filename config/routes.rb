@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   post "login", to: "users#login"
-  get "get_available_slots", to: "available_slots#get_available_slots"
+  get "get_available_dates", to: "available_slots#get_available_dates"
   get "get_recurring_hours", to: "recurring_hours#get_recurring_hours"
+  post "post_recurring_hours", to: "recurring_hours#post_recurring_hours"
 
   # resources :bookings
   # resources :users

@@ -1,6 +1,4 @@
 class UsersController < ApplicationController
-  skip_before_action :authenticate
-
   def login
     user  = params[:user_type] === "coach" ? Coach.last : Student.last
     set_token_in_header(user)
