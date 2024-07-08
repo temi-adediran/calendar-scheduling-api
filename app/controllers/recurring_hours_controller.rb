@@ -23,19 +23,15 @@ class RecurringHoursController < ApplicationController
   private
 
   def create_recurring_hours
-    @coach.create_recurring_hour(symbolized_params)
+    @coach.create_recurring_hour(symbolized_params(params[:recurring_hour]))
   end
 
   def update_recurring_hours
-    @coach.recurring_hour.update(symbolized_params)
+    @coach.recurring_hour.update(symbolized_params(params[:recurring_hour]))
   end
 
   def set_coach
     @coach ||= Coach.find(5)
-  end
-
-  def symbolized_params
-    JSON.parse(params[:recurring_hour].to_json, {symbolize_names: true})
   end
 
   def recurring_hour_params

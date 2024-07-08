@@ -15,7 +15,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_06_213223) do
   enable_extension "plpgsql"
 
   create_table "available_dates", force: :cascade do |t|
-    t.string "date", null: false
+    t.date "date", null: false
     t.string "time_slots", default: [], array: true
     t.bigint "coach_id"
     t.datetime "created_at", null: false

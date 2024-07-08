@@ -1,7 +1,7 @@
 class AvailableDate < ApplicationRecord
   belongs_to :coach
 
-  # enum :to_day, {1 => 'MON', 2 => 'TUE', 3 => 'WED', 4 => 'THUR', 5 => 'FRI', 6 => 'SAT', 7 => 'SUN'}
+  scope :upcoming, -> { where('date > ?', Date.yesterday) }
 end
 
 # == Schema Information
@@ -9,7 +9,7 @@ end
 # Table name: available_dates
 #
 #  id         :bigint           not null, primary key
-#  date       :string           not null
+#  date       :date             not null
 #  time_slots :string           default([]), is an Array
 #  created_at :datetime         not null
 #  updated_at :datetime         not null

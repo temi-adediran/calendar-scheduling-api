@@ -5,6 +5,10 @@ class ApplicationController < ActionController::API
 
   attr_reader :current_user
 
+  def symbolized_params(params)
+    JSON.parse(params.to_json, {symbolize_names: true})
+  end
+
   private
     def authenticate
       if user = authenticate_with_http_token { |token, _| User.find_signed(token) }
