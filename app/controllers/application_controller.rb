@@ -4,11 +4,11 @@ class ApplicationController < ActionController::API
   # before_action :authenticate
 
   def set_coach
-    @coach ||= Coach.last
+    @coach ||= Coach.find(5)
   end
 
   def set_student
-    @student ||= Student.last
+    @student ||= Student.first
   end
 
   def symbolized_params(params)

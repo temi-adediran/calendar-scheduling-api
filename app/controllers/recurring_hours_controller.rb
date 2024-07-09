@@ -16,14 +16,14 @@ class RecurringHoursController < ApplicationController
     if recurring
       render json: {message: "Saved successfully."}, status: :created
     else
-      render json: recurring.errors, status: :unprocessable_entity
+      render json: {error: "Not successful. Try again."}, status: :unprocessable_entity
     end
   end
 
   private
 
   def create_recurring_hours
-    @coach.recurring_hour.new(symbolized_params(params[:recurring_hour])).save
+    @coach.create_recurring_hour(symbolized_params(params[:recurring_hour]))
   end
 
   def update_recurring_hours

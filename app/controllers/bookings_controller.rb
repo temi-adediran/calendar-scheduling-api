@@ -1,6 +1,6 @@
 class BookingsController < ApplicationController
-  before_action :set_student, only: :book_session
-  before_action :set_coach, only: [:past_session, :post_rating, :book_session]
+  before_action :set_student, only: [:book_session, :upcoming_session]
+  before_action :set_coach
 
   def book_session
     time_booked = "#{params[:date]} #{params[:time]}".to_datetime
@@ -8,13 +8,14 @@ class BookingsController < ApplicationController
     if Booking.new(time_booked:, coach: @coach, student: @student).save
       render json: { message: "Booking was successful." }, status: :created
     else
-      render json: { error: "Save not successful. Please try again!" }, status: :unprocessable_entity
+      render json: { error: "Not successful. Please try again!" }, status: :unprocessable_entity
     end
   end
 
   def upcoming_session
     klass = params[:user_type].titleize.constantize
-    sessions = klass.last.bookings.upcoming
+    klass_id = params[:user_type] === "coach" ? @coach.id : @student.id
+    sessions = klass.find_by_id(klass_id).bookings.upcoming
     sessions_json = BookingSerializer.new(sessions).serializable_hash[:data].map{|v| v[:attributes] }.to_json
 
     render json: sessions_json, status: :ok

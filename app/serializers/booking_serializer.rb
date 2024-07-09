@@ -2,6 +2,8 @@ class BookingSerializer
   include JSONAPI::Serializer
   attributes :id, :note, :rating, :time_booked
 
+  cache_options store: Rails.cache, namespace: 'jsonapi-serializer', expires_in: 15.minutes
+
   attribute :start_time do |obj|
     obj.time_booked.strftime("%H:%M")
   end

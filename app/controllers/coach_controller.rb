@@ -1,5 +1,5 @@
 class CoachController < ApplicationController
-  before_action :set_coach, only: :available_slots_by_month
+  before_action :set_coach_by_id, only: :available_slots_by_month
 
   def available_slots_by_month
     month = params[:month].to_date
@@ -9,14 +9,14 @@ class CoachController < ApplicationController
 
   def get_all_coaches
     coaches = Coach.all
-    coaches_josn = CoachSerializer.new(coaches).serializable_hash[:data].map{|v| v[:attributes] }.to_json
-    render json: coaches_josn
+    coaches_json = CoachSerializer.new(coaches).serializable_hash[:data].map{|v| v[:attributes] }.to_json
+    render json: coaches_json
   end
 
-  # private
+  private
 
-  # def set_coach
-  #   @coach ||= Coach.find(params[:id])
-  # end
+  def set_coach_by_id
+    @coach ||= Coach.find(params[:id])
+  end
 
 end
