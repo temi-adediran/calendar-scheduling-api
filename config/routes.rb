@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   get "past_session", to: "bookings#past_session"
   post "post_rating", to: "bookings#post_rating"
 
+  get "get_all_coaches", to: "coach#get_all_coaches"
+
   # resources :bookings
   # resources :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
