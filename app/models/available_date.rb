@@ -2,8 +2,6 @@ class AvailableDate < ApplicationRecord
   belongs_to :coach
 
   scope :upcoming, -> { where('date > ?', Date.current) }
-  scope :upcoming_with_current, -> { where('date > ?', Date.yesterday) }
-
   scope :per_month, ->(month) { where(date: month.all_month ) }
 end
 

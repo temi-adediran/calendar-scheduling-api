@@ -2,7 +2,7 @@ class AvailableDatesController < ApplicationController
   before_action :set_coach
 
   def get_available_dates
-    available_dates = @coach.available_dates.upcoming_with_current
+    available_dates = @coach.available_dates.upcoming
     available_dates_json = AvailableDateSerializer.new(available_dates).serializable_hash[:data].map{|v| v[:attributes] }.to_json
     render json: available_dates_json, status: :ok
   end
@@ -15,7 +15,7 @@ class AvailableDatesController < ApplicationController
     if save_available_date
       render json: {message: "Saved successfully."}, status: :created
     else
-      render json: save_available_date.errors, status: :unprocessable_entity
+      render json: {error: "Not successful."}, status: :unprocessable_entity
     end
   end
 
@@ -28,7 +28,7 @@ class AvailableDatesController < ApplicationController
   private
 
   def create_available_date
-    @coach.available_dates.create(symbolized_params(params[:available_dates]))
+    @coach.available_dates.new(symbolized_params(params[:available_dates])).save
   end
 
   def update_available_date(available_date)

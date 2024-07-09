@@ -23,7 +23,7 @@ class RecurringHoursController < ApplicationController
   private
 
   def create_recurring_hours
-    @coach.create_recurring_hour(symbolized_params(params[:recurring_hour]))
+    @coach.recurring_hour.new(symbolized_params(params[:recurring_hour])).save
   end
 
   def update_recurring_hours

@@ -1,14 +1,14 @@
 class BookingsController < ApplicationController
-  before_action [:set_coach, :set_student], only: :book_session
-  before_action :set_coach, only: [:past_session, :post_rating]
+  before_action :set_student, only: :book_session
+  before_action :set_coach, only: [:past_session, :post_rating, :book_session]
 
   def book_session
     time_booked = "#{params[:date]} #{params[:time]}".to_datetime
 
-    if booking = Booking.new(time_booked:, coach: @coach, student: @student).save
+    if Booking.new(time_booked:, coach: @coach, student: @student).save
       render json: { message: "Booking was successful." }, status: :created
     else
-      render json: booking.errors, status: :unprocessable_entity
+      render json: { error: "Save not successful. Please try again!" }, status: :unprocessable_entity
     end
   end
 
@@ -33,7 +33,7 @@ class BookingsController < ApplicationController
     if booking.update(rating: params[:rating], note: params[:note])
       render json: {message: "Update successful"}, status: :ok
     else
-      render json: booking.errors, status: :unprocessable_entity
+      render json: { error: "Update not successful. Please try again!" }, status: :unprocessable_entity
     end
   end
 end
