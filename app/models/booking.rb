@@ -1,6 +1,9 @@
 class Booking < ApplicationRecord
   belongs_to :coach
   belongs_to :student
+
+  scope :upcoming, -> { where('time_booked > ?', DateTime.current) }
+  scope :past, -> { where('time_booked < ?', DateTime.current) }
 end
 
 

@@ -2,8 +2,8 @@ class AvailableDatesController < ApplicationController
   before_action :set_coach
 
   def get_available_dates
-    available_dates = @coach.available_dates.upcoming
-    available_dates_json = AvailableDateSerializer.new(available_dates).serializable_hash[:data].map{|x| x[:attributes] }.to_json
+    available_dates = @coach.available_dates.upcoming_with_current
+    available_dates_json = AvailableDateSerializer.new(available_dates).serializable_hash[:data].map{|v| v[:attributes] }.to_json
     render json: available_dates_json, status: :ok
   end
 
@@ -41,10 +41,6 @@ class AvailableDatesController < ApplicationController
 
   def time_slots_param
     params[:available_dates][:time_slots]
-  end
-
-  def set_coach
-    @coach ||= Coach.find(2)
   end
 
   def available_dates_params

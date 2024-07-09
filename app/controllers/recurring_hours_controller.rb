@@ -30,10 +30,6 @@ class RecurringHoursController < ApplicationController
     @coach.recurring_hour.update(symbolized_params(params[:recurring_hour]))
   end
 
-  def set_coach
-    @coach ||= Coach.find(5)
-  end
-
   def recurring_hour_params
     params.require(:recurring_hour).permit(:MON, :TUE, :WED, :THUR, :FRI, :SAT, :SUN)
   end

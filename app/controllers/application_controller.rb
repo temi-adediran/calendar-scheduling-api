@@ -3,7 +3,13 @@ class ApplicationController < ActionController::API
 
   # before_action :authenticate
 
-  attr_reader :current_user
+  def set_coach
+    @coach ||= Coach.last
+  end
+
+  def set_student
+    @student ||= Student.last
+  end
 
   def symbolized_params(params)
     JSON.parse(params.to_json, {symbolize_names: true})

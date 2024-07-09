@@ -8,6 +8,12 @@ Rails.application.routes.draw do
   post "post_available_dates", to: "available_dates#post_available_dates"
   delete "delete_available_date", to: "available_dates#delete_available_date"
 
+  get "available_slots_by_month", to: "coach#available_slots_by_month"
+
+  post "book_session", to: "bookings#book_session"
+  get "upcoming_session", to: "bookings#upcoming_session"
+  get "past_session", to: "bookings#past_session"
+
   # resources :bookings
   # resources :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

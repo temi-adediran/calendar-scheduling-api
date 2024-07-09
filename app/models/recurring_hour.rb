@@ -11,7 +11,7 @@ end
 #  MON        :string           default([]), is an Array
 #  SAT        :string           default([]), is an Array
 #  SUN        :string           default([]), is an Array
-#  THUR       :string           default([]), is an Array
+#  THU        :string           default([]), is an Array
 #  TUE        :string           default([]), is an Array
 #  WED        :string           default([]), is an Array
 #  created_at :datetime         not null
