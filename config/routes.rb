@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   post "book_session", to: "bookings#book_session"
   get "upcoming_session", to: "bookings#upcoming_session"
   get "past_session", to: "bookings#past_session"
+  post "post_rating", to: "bookings#post_rating"
 
   # resources :bookings
   # resources :users
