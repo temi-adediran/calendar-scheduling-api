@@ -2,11 +2,11 @@ class RecurringHoursController < ApplicationController
   before_action :set_coach
 
   def get_recurring_hours
-    if recurring_hours = @coach.try(:recurring_hour)
-      recurring_hour_json = RecurringHourSerializer.new(recurring_hours).serializable_hash[:data][:attributes].to_json
+    if recurring_hour = @coach.try(:recurring_hour)
+      recurring_hour_json = RecurringHourSerializer.new(recurring_hour).serializable_hash[:data][:attributes].to_json
       render json: recurring_hour_json
     else
-      render json: recurring_hours
+      render json: recurring_hour
     end
   end
 
@@ -14,6 +14,7 @@ class RecurringHoursController < ApplicationController
     recurring = @coach.try(:recurring_hour) ? update_recurring_hours : create_recurring_hours
 
     if recurring
+      touch_coach
       render json: {message: "Saved successfully."}, status: :created
     else
       render json: {error: "Not successful. Try again."}, status: :unprocessable_entity

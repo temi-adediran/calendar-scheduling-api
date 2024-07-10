@@ -6,7 +6,9 @@ class Coach < ApplicationRecord
 
   def upcoming_available_slots(month)
     # {"1/4/24" => ["9:00", "12:00"], "2/4/24" => ["8:00", "12:00"], ...., "31/4/24": []}
+
     all_month = month.all_month.map{|date| date }
+
     available_slots = all_month.inject({}) do |month_hash, date|
       formattedDate = date.strftime("%d/%m/%Y")
       month_hash[formattedDate] = get_unbooked_time_slots(date, month)
@@ -17,10 +19,6 @@ class Coach < ApplicationRecord
   end
 
   private
-
-  def upcoming_dates(month)
-    self.available_dates.upcoming.per_month(month)
-  end
 
   def get_unbooked_time_slots(date, month)
     booked_time_slots = self.bookings.upcoming.map(&:time_booked)
@@ -40,6 +38,10 @@ class Coach < ApplicationRecord
     else
       []
     end
+  end
+
+  def upcoming_dates(month)
+    self.available_dates.upcoming.per_month(month)
   end
 end
 
