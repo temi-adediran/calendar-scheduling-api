@@ -7,7 +7,9 @@ class Coach < ApplicationRecord
   def upcoming_available_slots(month)
     # {"1/4/24" => ["9:00", "12:00"], "2/4/24" => ["8:00", "12:00"], ...., "31/4/24": []}
 
-    all_month = month.all_month.map{|date| date }
+    # if month is current month, return dates from tomorrow, else return all month dates
+    all_month = month.month === Date.current.month ? Date.tomorrow..Date.current.end_of_month : month.all_month.map{|date| date }
+
 
     available_slots = all_month.inject({}) do |month_hash, date|
       formattedDate = date.strftime("%d/%m/%Y")
