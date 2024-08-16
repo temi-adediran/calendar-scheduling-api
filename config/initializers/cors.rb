@@ -7,7 +7,7 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins "http://localhost:3000"
+    origins "http://localhost:3000", "https://calendly-clone-fe-df83b47ff392.herokuapp.com"
 
     resource "*",
       headers: :any,
